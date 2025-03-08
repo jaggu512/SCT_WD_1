@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive Landing Page</title>
+  <style>
+    body {
+      margin: 0;
+      transition: background-color 0.5s ease;
+      font-family: Arial, sans-serif;
+    }
+
+    /* Fixed Navigation Bar */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      padding: 15px;
+      text-align: center;
+      transition: background-color 0.3s ease;
+    }
+
+    nav:hover {
+      background-color: rgba(255, 255, 255, 0.8);
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 15px;
+      font-size: 18px;
+      transition: color 0.3s ease;
+    }
+
+    nav:hover a {
+      color: black;
+    }
+
+    section {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 2rem;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="#section1">Home</a>
+    <a href="#section2">About</a>
+    <a href="#section3">Services</a>
+    <a href="#section4">Contact</a>
+  </nav>
+
+  <section id="section1" data-bg-color="#3498db">Home Section</section>
+  <section id="section2" data-bg-color="#e74c3c">About Section</section>
+  <section id="section3" data-bg-color="#2ecc71">Services Section</section>
+  <section id="section4" data-bg-color="#9b59b6">Contact Section</section>
+
+  <script>
+    const sections = document.querySelectorAll('section');
+    const options = { root: null, threshold: 0.5 };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          document.body.style.backgroundColor = entry.target.getAttribute('data-bg-color');
+        }
+      });
+    }, options);
+
+    sections.forEach(section => {
+      observer.observe(section);
+    });
+  </script>
+</body>
+</html>
